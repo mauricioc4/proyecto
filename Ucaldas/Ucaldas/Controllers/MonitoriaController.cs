@@ -404,27 +404,35 @@ namespace Ucaldas.Controllers
                             if (!validarMonitoriaAcademica(tipoMonitoria))
                             {
                                 string actividaAcademica = "-1";
-                                if (!datos[12].Equals("") && !datos[13].Equals(""))
+
+                                if (!validarExistenciaMonitoria(idEstudiante, periodo))
                                 {
-                                    decimal horasReportadas = decimal.Parse(datos[12]);
-                                    decimal horasPagas = decimal.Parse(datos[13]);
-
-                                    decimal total = calcularPagoMonitoria(tipoMonitoria, horasPagas);
-
-                                    MONITORIA monitoria = new MONITORIA()
+                                    if (!datos[12].Equals("") && !datos[13].Equals(""))
                                     {
-                                        ID_ESTUDIANTE = idEstudiante,
-                                        PERIODO = periodo,
-                                        FECHA = DateTime.Now,
-                                        ID_TIPO_MONITORIA = tipoMonitoria,
-                                        ID_ACTIVIDAD_ACADM = actividaAcademica,
-                                        HORAS_REPORTADAS = horasReportadas,
-                                        HORAS_PAGAS = horasPagas,
-                                        TOTAL = total,
-                                        ESTADO = 1
-                                    };
-                                    bd.MONITORIA.Add(monitoria);
-                                    return true;
+                                        decimal horasReportadas = decimal.Parse(datos[12]);
+                                        decimal horasPagas = decimal.Parse(datos[13]);
+
+                                        decimal total = calcularPagoMonitoria(tipoMonitoria, horasPagas);
+
+                                        MONITORIA monitoria = new MONITORIA()
+                                        {
+                                            ID_ESTUDIANTE = idEstudiante,
+                                            PERIODO = periodo,
+                                            FECHA = DateTime.Now,
+                                            ID_TIPO_MONITORIA = tipoMonitoria,
+                                            ID_ACTIVIDAD_ACADM = actividaAcademica,
+                                            HORAS_REPORTADAS = horasReportadas,
+                                            HORAS_PAGAS = horasPagas,
+                                            TOTAL = total,
+                                            ESTADO = 1
+                                        };
+                                        bd.MONITORIA.Add(monitoria);
+                                        return true;
+                                    }
+                                }
+                                else
+                                {
+                                    programarAlertSalida("Error", "El estudiante que registra en la fila " + (numRegistros + 1) + " ya tiene registrado una monitoria para el periodo " + periodo, "error", false);
                                 }
                             }
                             else
