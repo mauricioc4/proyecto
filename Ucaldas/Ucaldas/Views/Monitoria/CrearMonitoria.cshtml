@@ -1,0 +1,85 @@
+﻿@model Ucaldas.Controllers.MonitoriaController
+
+@{
+    ViewBag.Title = "Registro de monitorias";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Registro de Monitoria</h2>
+<br />
+<br />
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <div class="form-group ">
+            <label class="col-md-2 h4">Cod. del Estudiante</label>
+            <div class="col-md-10">
+                <input class="form-control" required type="text" placeholder="123456" name="COD_ESTUDIANTE" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2 h4">Tipo de monitoria</label>
+            <div class="col-md-4">
+                <select required class="form-control" name="TIPO_MONITORIA">
+                    <option></option>
+                    @foreach (Ucaldas.Models.TIPO_MONITORIA tipo_monitoria in Model.obtenerTiposMonitoriaActivos())
+                        {
+                            <option value="@tipo_monitoria.ID_TIPO_MONITORIA">@tipo_monitoria.NOMBRE</option>
+                        }
+                    
+                </select>
+            </div>
+            <label class="col-md-2 h4">Codigo de la actividad academica</label>
+            <div class="col-md-4">
+                <input class="form-control" type="text" placeholder="12345" name="COD_ACT_ACADEMICA"/>
+            </div>
+        </div>
+
+        <div class="form-group ">
+            <label class="col-md-2 h4">Horas reportadas</label>
+            <div class="col-md-10">
+                <input required class="form-control" type="number" placeholder="5" name="HORAS_REPORTADAS" />
+            </div>
+        </div>
+
+        <div class="form-group ">
+            <label class="col-md-2 h4">Horas pagas</label>
+            <div class="col-md-10">
+                <input required class="form-control" type="number" placeholder="5" name="HORAS_PAGAS" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2 h4">Periodo academico</label>
+            <div class="col-md-10">
+                <select required class="form-control" name="PERIODO">
+                    <option></option>
+                    <option value="@Model.obtenerPeriodos()[0]">@Model.obtenerPeriodos()[0]</option>
+                    <option value="@Model.obtenerPeriodos()[1]">@Model.obtenerPeriodos()[1]</option>
+                </select>
+            </div>
+        </div>
+        <br />
+        <br />
+
+
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.ActionLink("Regresar", "Index", "Home")
+                <button type="submit" class="btn btn-default">Registrar</button>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

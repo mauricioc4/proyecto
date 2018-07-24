@@ -1,0 +1,115 @@
+﻿@model Ucaldas.Models.MONITORIA
+@{
+    ViewBag.Title = "Modificar Monitorias";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Modificar Monitoria</h2>
+<br />
+<br />
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <div class="form-group ">
+            <label class="col-md-2 h4">Cod. del Estudiante</label>
+            <div class="col-md-4">
+                <input class="form-control" required type="number" placeholder="123456" name="COD_ESTUDIANTE" value="@ViewBag.CESTUDIANTE" />
+            </div>
+            <label class="col-md-2 h4">Periodo academico</label>
+            <div class="col-md-4">
+                <input class="form-control" required type="text" placeholder="Ej: 2018-I o 2018-II" name="PERIODO" value="@ViewBag.CPERIODO" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-default">Modificar</button>
+            </div>
+        </div>
+
+        @if (Model != null)
+        {
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="form-group ">
+                        <label class="col-md-2 h4">Estudiante:</label>
+                        <div class="col-md-4">
+                            <label class="h6">@Model.ESTUDIANTE.PERSONA.NOMBRE @Model.ESTUDIANTE.PERSONA.APELLIDOS</label>
+                        </div>
+                        <label class="col-md-2 h4">Periodo:</label>
+                        <div class="col-md-4">
+                            <label class="h6">@Model.PERIODO</label>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <label class="col-md-2 h4">Tipo de monitoria:</label>
+                        <div class="col-md-10">
+                            <label class="h6">@Model.TIPO_MONITORIA.NOMBRE</label>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <label class="col-md-2 h4">Horas reportadas:</label>
+                        <div class="col-md-4">
+                            <input value="@Model.HORAS_REPORTADAS" class="form-control" name="HORAS_REPORTADAS" />
+                        </div>
+                        <label class="col-md-2 h4">Horas pagas:</label>
+                        <div class="col-md-4">
+                            <input value="@Model.HORAS_PAGAS" class="form-control" name="HORAS_PAGAS" />
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <label class="col-md-2 h4">Total:</label>
+                        <div class="col-md-10">
+                            <label class="h6">@Model.TOTAL</label>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <label class="col-md-2 h4">Estado:</label>
+                        <div class="col-md-10">
+                            <select required name="ESTADO" class="form-control">
+                                <option></option>
+                                @if(Model.ESTADO == 1){
+                                <option selected value="1">Activo</option>
+                                <option value="0">Inactivo</option>
+                                }
+                                else if (Model.ESTADO == 0)
+                                {
+                                <option value="1">Activo</option>
+                                <option selected value="0">Inactivo</option>
+                                }
+                                else
+                                {
+                                <option value="1">Activo</option>
+                                <option value="0">Inactivo</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.ActionLink("Regresar", "Index")
+                        <button type="submit" class="btn btn-default">Guardar cambios</button>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+

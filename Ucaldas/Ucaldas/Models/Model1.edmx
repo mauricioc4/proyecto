@@ -1,0 +1,797 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ACT_ACAD_ESTUDIANTE">
+          <Key>
+            <PropertyRef Name="ID_ESTUDIANTE" />
+            <PropertyRef Name="ID_ACTIVIDAD_ACADM" />
+            <PropertyRef Name="PERIODO" />
+          </Key>
+          <Property Name="ID_ESTUDIANTE" Type="number" Precision="20" Scale="0" Nullable="false" />
+          <Property Name="ID_ACTIVIDAD_ACADM" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="PERIODO" Type="varchar2" MaxLength="10" Nullable="false" />
+          <Property Name="NOTA" Type="number" Precision="2" Scale="1" Nullable="false" />
+          <Property Name="FECHA" Type="date" />
+          <Property Name="ESTADO" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ACTIVIDAD_ACADEMICA">
+          <Key>
+            <PropertyRef Name="CODIGO" />
+          </Key>
+          <Property Name="CODIGO" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="60" Nullable="false" />
+          <Property Name="ID_PROGRAMA" Type="varchar2" MaxLength="20" />
+          <Property Name="ESTADO" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="APOYO_ECONOMICO">
+          <Key>
+            <PropertyRef Name="ID_APOYO" />
+          </Key>
+          <Property Name="ID_APOYO" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="FECHA_SOLICITUD" Type="date" Nullable="false" />
+          <Property Name="COSTO_INSCRIPCION" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="COSTO_TRANSPORTE" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="COSTO_ALOJAMIENTO" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="COSTO_ALIMENTACION" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="VALOR_SOLICITADO" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="ID_EVENTO" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="ID_ESTUDIANTE" Type="number" Precision="20" Scale="0" Nullable="false" />
+          <Property Name="CONCEPTO_DIR_PROGRAMA" Type="varchar2" MaxLength="256" />
+          <Property Name="CONCEPTO_DIR_LINEAINV" Type="varchar2" MaxLength="256" />
+          <Property Name="ESTADO" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DIRECTORIO_ARCHIVOS">
+          <Key>
+            <PropertyRef Name="ID_DIRECTORIO" />
+          </Key>
+          <Property Name="ID_DIRECTORIO" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE_ARCHIVO" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="RUTA_SERVER" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="FECHA_SUBIDA" Type="date" Nullable="false" />
+          <Property Name="ID_APOYO_ECONOMICO" Type="varchar2" MaxLength="20" />
+          <Property Name="ESTADO" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ESTUDIANTE">
+          <Key>
+            <PropertyRef Name="CODIGO" />
+          </Key>
+          <Property Name="CODIGO" Type="number" Precision="20" Scale="0" Nullable="false" />
+          <Property Name="ID_PERSONA" Type="varchar2" MaxLength="50" />
+          <Property Name="SEMESTRE" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="FECHA_INGRESO" Type="date" />
+          <Property Name="PROMEDIO_ACUMULADO" Type="number" Precision="3" Scale="1" Nullable="false" />
+          <Property Name="ID_PROGRAMA" Type="varchar2" MaxLength="20" />
+          <Property Name="ESTADO" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EVENTO">
+          <Key>
+            <PropertyRef Name="ID_EVENTO" />
+          </Key>
+          <Property Name="ID_EVENTO" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="FECHA_EVENTO" Type="date" Nullable="false" />
+          <Property Name="TIPO" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="LUGAR" Type="varchar2" MaxLength="10" Nullable="false" />
+          <Property Name="ESTADO" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MONITORIA">
+          <Key>
+            <PropertyRef Name="ID_ESTUDIANTE" />
+            <PropertyRef Name="PERIODO" />
+          </Key>
+          <Property Name="ID_ESTUDIANTE" Type="number" Precision="20" Scale="0" Nullable="false" />
+          <Property Name="PERIODO" Type="varchar2" MaxLength="10" Nullable="false" />
+          <Property Name="FECHA" Type="date" />
+          <Property Name="ID_TIPO_MONITORIA" Type="varchar2" MaxLength="20" />
+          <Property Name="ID_ACTIVIDAD_ACADM" Type="varchar2" MaxLength="20" />
+          <Property Name="HORAS_REPORTADAS" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="HORAS_PAGAS" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TOTAL" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ESTADO" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PERSONA">
+          <Key>
+            <PropertyRef Name="CEDULA" />
+          </Key>
+          <Property Name="CEDULA" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="60" Nullable="false" />
+          <Property Name="APELLIDOS" Type="varchar2" MaxLength="60" Nullable="false" />
+          <Property Name="DIRECCION" Type="varchar2" MaxLength="60" />
+          <Property Name="TELEFONO" Type="varchar2" MaxLength="20" />
+          <Property Name="ESTADO" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PROGRAMA">
+          <Key>
+            <PropertyRef Name="ID_PROGRAMA" />
+          </Key>
+          <Property Name="ID_PROGRAMA" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="60" Nullable="false" />
+          <Property Name="TELEFONO" Type="varchar2" MaxLength="20" />
+          <Property Name="ESTADO" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TIPO_MONITORIA">
+          <Key>
+            <PropertyRef Name="ID_TIPO_MONITORIA" />
+          </Key>
+          <Property Name="ID_TIPO_MONITORIA" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="60" Nullable="false" />
+          <Property Name="VALOR_HORA" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="ESTADO" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <Association Name="FI_ID_ESTDIANTE">
+          <End Role="ESTUDIANTE" Type="Self.ESTUDIANTE" Multiplicity="1" />
+          <End Role="APOYO_ECONOMICO" Type="Self.APOYO_ECONOMICO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTUDIANTE">
+              <PropertyRef Name="CODIGO" />
+            </Principal>
+            <Dependent Role="APOYO_ECONOMICO">
+              <PropertyRef Name="ID_ESTUDIANTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ACT_ACAD">
+          <End Role="ACTIVIDAD_ACADEMICA" Type="Self.ACTIVIDAD_ACADEMICA" Multiplicity="0..1" />
+          <End Role="MONITORIA" Type="Self.MONITORIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACTIVIDAD_ACADEMICA">
+              <PropertyRef Name="CODIGO" />
+            </Principal>
+            <Dependent Role="MONITORIA">
+              <PropertyRef Name="ID_ACTIVIDAD_ACADM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APYO_ECONOMICO">
+          <End Role="APOYO_ECONOMICO" Type="Self.APOYO_ECONOMICO" Multiplicity="0..1" />
+          <End Role="DIRECTORIO_ARCHIVOS" Type="Self.DIRECTORIO_ARCHIVOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APOYO_ECONOMICO">
+              <PropertyRef Name="ID_APOYO" />
+            </Principal>
+            <Dependent Role="DIRECTORIO_ARCHIVOS">
+              <PropertyRef Name="ID_APOYO_ECONOMICO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID_ACT_ACAD">
+          <End Role="ACTIVIDAD_ACADEMICA" Type="Self.ACTIVIDAD_ACADEMICA" Multiplicity="1" />
+          <End Role="ACT_ACAD_ESTUDIANTE" Type="Self.ACT_ACAD_ESTUDIANTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACTIVIDAD_ACADEMICA">
+              <PropertyRef Name="CODIGO" />
+            </Principal>
+            <Dependent Role="ACT_ACAD_ESTUDIANTE">
+              <PropertyRef Name="ID_ACTIVIDAD_ACADM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID_EST">
+          <End Role="ESTUDIANTE" Type="Self.ESTUDIANTE" Multiplicity="1" />
+          <End Role="MONITORIA" Type="Self.MONITORIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTUDIANTE">
+              <PropertyRef Name="CODIGO" />
+            </Principal>
+            <Dependent Role="MONITORIA">
+              <PropertyRef Name="ID_ESTUDIANTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID_EST_ACT_ACAD">
+          <End Role="ESTUDIANTE" Type="Self.ESTUDIANTE" Multiplicity="1" />
+          <End Role="ACT_ACAD_ESTUDIANTE" Type="Self.ACT_ACAD_ESTUDIANTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTUDIANTE">
+              <PropertyRef Name="CODIGO" />
+            </Principal>
+            <Dependent Role="ACT_ACAD_ESTUDIANTE">
+              <PropertyRef Name="ID_ESTUDIANTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID_EVENTO">
+          <End Role="EVENTO" Type="Self.EVENTO" Multiplicity="1" />
+          <End Role="APOYO_ECONOMICO" Type="Self.APOYO_ECONOMICO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EVENTO">
+              <PropertyRef Name="ID_EVENTO" />
+            </Principal>
+            <Dependent Role="APOYO_ECONOMICO">
+              <PropertyRef Name="ID_EVENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID_PROGRAMA">
+          <End Role="PROGRAMA" Type="Self.PROGRAMA" Multiplicity="0..1" />
+          <End Role="ACTIVIDAD_ACADEMICA" Type="Self.ACTIVIDAD_ACADEMICA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROGRAMA">
+              <PropertyRef Name="ID_PROGRAMA" />
+            </Principal>
+            <Dependent Role="ACTIVIDAD_ACADEMICA">
+              <PropertyRef Name="ID_PROGRAMA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID_PROGRAMA_EST">
+          <End Role="PROGRAMA" Type="Self.PROGRAMA" Multiplicity="0..1" />
+          <End Role="ESTUDIANTE" Type="Self.ESTUDIANTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROGRAMA">
+              <PropertyRef Name="ID_PROGRAMA" />
+            </Principal>
+            <Dependent Role="ESTUDIANTE">
+              <PropertyRef Name="ID_PROGRAMA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PERSONA">
+          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="0..1" />
+          <End Role="ESTUDIANTE" Type="Self.ESTUDIANTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONA">
+              <PropertyRef Name="CEDULA" />
+            </Principal>
+            <Dependent Role="ESTUDIANTE">
+              <PropertyRef Name="ID_PERSONA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TIPO_MONITORIA">
+          <End Role="TIPO_MONITORIA" Type="Self.TIPO_MONITORIA" Multiplicity="0..1" />
+          <End Role="MONITORIA" Type="Self.MONITORIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_MONITORIA">
+              <PropertyRef Name="ID_TIPO_MONITORIA" />
+            </Principal>
+            <Dependent Role="MONITORIA">
+              <PropertyRef Name="ID_TIPO_MONITORIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="ACT_ACAD_ESTUDIANTE" EntityType="Self.ACT_ACAD_ESTUDIANTE" Schema="BIENESTARUNIVERSITARIO" store:Type="Tables" />
+          <EntitySet Name="ACTIVIDAD_ACADEMICA" EntityType="Self.ACTIVIDAD_ACADEMICA" Schema="BIENESTARUNIVERSITARIO" store:Type="Tables" />
+          <EntitySet Name="APOYO_ECONOMICO" EntityType="Self.APOYO_ECONOMICO" Schema="BIENESTARUNIVERSITARIO" store:Type="Tables" />
+          <EntitySet Name="DIRECTORIO_ARCHIVOS" EntityType="Self.DIRECTORIO_ARCHIVOS" Schema="BIENESTARUNIVERSITARIO" store:Type="Tables" />
+          <EntitySet Name="ESTUDIANTE" EntityType="Self.ESTUDIANTE" Schema="BIENESTARUNIVERSITARIO" store:Type="Tables" />
+          <EntitySet Name="EVENTO" EntityType="Self.EVENTO" Schema="BIENESTARUNIVERSITARIO" store:Type="Tables" />
+          <EntitySet Name="MONITORIA" EntityType="Self.MONITORIA" Schema="BIENESTARUNIVERSITARIO" store:Type="Tables" />
+          <EntitySet Name="PERSONA" EntityType="Self.PERSONA" Schema="BIENESTARUNIVERSITARIO" store:Type="Tables" />
+          <EntitySet Name="PROGRAMA" EntityType="Self.PROGRAMA" Schema="BIENESTARUNIVERSITARIO" store:Type="Tables" />
+          <EntitySet Name="TIPO_MONITORIA" EntityType="Self.TIPO_MONITORIA" Schema="BIENESTARUNIVERSITARIO" store:Type="Tables" />
+          <AssociationSet Name="FI_ID_ESTDIANTE" Association="Self.FI_ID_ESTDIANTE">
+            <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+            <End Role="APOYO_ECONOMICO" EntitySet="APOYO_ECONOMICO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ACT_ACAD" Association="Self.FK_ACT_ACAD">
+            <End Role="ACTIVIDAD_ACADEMICA" EntitySet="ACTIVIDAD_ACADEMICA" />
+            <End Role="MONITORIA" EntitySet="MONITORIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APYO_ECONOMICO" Association="Self.FK_APYO_ECONOMICO">
+            <End Role="APOYO_ECONOMICO" EntitySet="APOYO_ECONOMICO" />
+            <End Role="DIRECTORIO_ARCHIVOS" EntitySet="DIRECTORIO_ARCHIVOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID_ACT_ACAD" Association="Self.FK_ID_ACT_ACAD">
+            <End Role="ACTIVIDAD_ACADEMICA" EntitySet="ACTIVIDAD_ACADEMICA" />
+            <End Role="ACT_ACAD_ESTUDIANTE" EntitySet="ACT_ACAD_ESTUDIANTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID_EST" Association="Self.FK_ID_EST">
+            <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+            <End Role="MONITORIA" EntitySet="MONITORIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID_EST_ACT_ACAD" Association="Self.FK_ID_EST_ACT_ACAD">
+            <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+            <End Role="ACT_ACAD_ESTUDIANTE" EntitySet="ACT_ACAD_ESTUDIANTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID_EVENTO" Association="Self.FK_ID_EVENTO">
+            <End Role="EVENTO" EntitySet="EVENTO" />
+            <End Role="APOYO_ECONOMICO" EntitySet="APOYO_ECONOMICO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID_PROGRAMA" Association="Self.FK_ID_PROGRAMA">
+            <End Role="PROGRAMA" EntitySet="PROGRAMA" />
+            <End Role="ACTIVIDAD_ACADEMICA" EntitySet="ACTIVIDAD_ACADEMICA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID_PROGRAMA_EST" Association="Self.FK_ID_PROGRAMA_EST">
+            <End Role="PROGRAMA" EntitySet="PROGRAMA" />
+            <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PERSONA" Association="Self.FK_PERSONA">
+            <End Role="PERSONA" EntitySet="PERSONA" />
+            <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TIPO_MONITORIA" Association="Self.FK_TIPO_MONITORIA">
+            <End Role="TIPO_MONITORIA" EntitySet="TIPO_MONITORIA" />
+            <End Role="MONITORIA" EntitySet="MONITORIA" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ACT_ACAD_ESTUDIANTE">
+          <Key>
+            <PropertyRef Name="ID_ESTUDIANTE" />
+            <PropertyRef Name="ID_ACTIVIDAD_ACADM" />
+            <PropertyRef Name="PERIODO" />
+          </Key>
+          <Property Name="ID_ESTUDIANTE" Type="Decimal" Precision="20" Scale="0" Nullable="false" />
+          <Property Name="ID_ACTIVIDAD_ACADM" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PERIODO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOTA" Type="Decimal" Precision="2" Scale="1" Nullable="false" />
+          <Property Name="FECHA" Type="DateTime" />
+          <Property Name="ESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="ACTIVIDAD_ACADEMICA" Relationship="Self.FK_ID_ACT_ACAD" FromRole="ACT_ACAD_ESTUDIANTE" ToRole="ACTIVIDAD_ACADEMICA" />
+          <NavigationProperty Name="ESTUDIANTE" Relationship="Self.FK_ID_EST_ACT_ACAD" FromRole="ACT_ACAD_ESTUDIANTE" ToRole="ESTUDIANTE" />
+        </EntityType>
+        <EntityType Name="ACTIVIDAD_ACADEMICA">
+          <Key>
+            <PropertyRef Name="CODIGO" />
+          </Key>
+          <Property Name="CODIGO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_PROGRAMA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="ACT_ACAD_ESTUDIANTE" Relationship="Self.FK_ID_ACT_ACAD" FromRole="ACTIVIDAD_ACADEMICA" ToRole="ACT_ACAD_ESTUDIANTE" />
+          <NavigationProperty Name="MONITORIA" Relationship="Self.FK_ACT_ACAD" FromRole="ACTIVIDAD_ACADEMICA" ToRole="MONITORIA" />
+          <NavigationProperty Name="PROGRAMA" Relationship="Self.FK_ID_PROGRAMA" FromRole="ACTIVIDAD_ACADEMICA" ToRole="PROGRAMA" />
+        </EntityType>
+        <EntityType Name="APOYO_ECONOMICO">
+          <Key>
+            <PropertyRef Name="ID_APOYO" />
+          </Key>
+          <Property Name="ID_APOYO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FECHA_SOLICITUD" Type="DateTime" Nullable="false" />
+          <Property Name="COSTO_INSCRIPCION" Type="Int32" Nullable="false" />
+          <Property Name="COSTO_TRANSPORTE" Type="Int32" Nullable="false" />
+          <Property Name="COSTO_ALOJAMIENTO" Type="Int32" Nullable="false" />
+          <Property Name="COSTO_ALIMENTACION" Type="Int32" Nullable="false" />
+          <Property Name="VALOR_SOLICITADO" Type="Int32" Nullable="false" />
+          <Property Name="ID_EVENTO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_ESTUDIANTE" Type="Decimal" Precision="20" Scale="0" Nullable="false" />
+          <Property Name="CONCEPTO_DIR_PROGRAMA" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="CONCEPTO_DIR_LINEAINV" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="ESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="ESTUDIANTE" Relationship="Self.FI_ID_ESTDIANTE" FromRole="APOYO_ECONOMICO" ToRole="ESTUDIANTE" />
+          <NavigationProperty Name="DIRECTORIO_ARCHIVOS" Relationship="Self.FK_APYO_ECONOMICO" FromRole="APOYO_ECONOMICO" ToRole="DIRECTORIO_ARCHIVOS" />
+          <NavigationProperty Name="EVENTO" Relationship="Self.FK_ID_EVENTO" FromRole="APOYO_ECONOMICO" ToRole="EVENTO" />
+        </EntityType>
+        <EntityType Name="DIRECTORIO_ARCHIVOS">
+          <Key>
+            <PropertyRef Name="ID_DIRECTORIO" />
+          </Key>
+          <Property Name="ID_DIRECTORIO" Type="Int32" Nullable="false" />
+          <Property Name="NOMBRE_ARCHIVO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RUTA_SERVER" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FECHA_SUBIDA" Type="DateTime" Nullable="false" />
+          <Property Name="ID_APOYO_ECONOMICO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="APOYO_ECONOMICO" Relationship="Self.FK_APYO_ECONOMICO" FromRole="DIRECTORIO_ARCHIVOS" ToRole="APOYO_ECONOMICO" />
+        </EntityType>
+        <EntityType Name="ESTUDIANTE">
+          <Key>
+            <PropertyRef Name="CODIGO" />
+          </Key>
+          <Property Name="CODIGO" Type="Decimal" Precision="20" Scale="0" Nullable="false" />
+          <Property Name="ID_PERSONA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SEMESTRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FECHA_INGRESO" Type="DateTime" />
+          <Property Name="PROMEDIO_ACUMULADO" Type="Decimal" Precision="3" Scale="1" Nullable="false" />
+          <Property Name="ID_PROGRAMA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="ACT_ACAD_ESTUDIANTE" Relationship="Self.FK_ID_EST_ACT_ACAD" FromRole="ESTUDIANTE" ToRole="ACT_ACAD_ESTUDIANTE" />
+          <NavigationProperty Name="APOYO_ECONOMICO" Relationship="Self.FI_ID_ESTDIANTE" FromRole="ESTUDIANTE" ToRole="APOYO_ECONOMICO" />
+          <NavigationProperty Name="MONITORIA" Relationship="Self.FK_ID_EST" FromRole="ESTUDIANTE" ToRole="MONITORIA" />
+          <NavigationProperty Name="PROGRAMA" Relationship="Self.FK_ID_PROGRAMA_EST" FromRole="ESTUDIANTE" ToRole="PROGRAMA" />
+          <NavigationProperty Name="PERSONA" Relationship="Self.FK_PERSONA" FromRole="ESTUDIANTE" ToRole="PERSONA" />
+        </EntityType>
+        <EntityType Name="EVENTO">
+          <Key>
+            <PropertyRef Name="ID_EVENTO" />
+          </Key>
+          <Property Name="ID_EVENTO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FECHA_EVENTO" Type="DateTime" Nullable="false" />
+          <Property Name="TIPO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LUGAR" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="APOYO_ECONOMICO" Relationship="Self.FK_ID_EVENTO" FromRole="EVENTO" ToRole="APOYO_ECONOMICO" />
+        </EntityType>
+        <EntityType Name="MONITORIA">
+          <Key>
+            <PropertyRef Name="ID_ESTUDIANTE" />
+            <PropertyRef Name="PERIODO" />
+          </Key>
+          <Property Name="ID_ESTUDIANTE" Type="Decimal" Precision="20" Scale="0" Nullable="false" />
+          <Property Name="PERIODO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FECHA" Type="DateTime" />
+          <Property Name="ID_TIPO_MONITORIA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ID_ACTIVIDAD_ACADM" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="HORAS_REPORTADAS" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="HORAS_PAGAS" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TOTAL" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="ACTIVIDAD_ACADEMICA" Relationship="Self.FK_ACT_ACAD" FromRole="MONITORIA" ToRole="ACTIVIDAD_ACADEMICA" />
+          <NavigationProperty Name="ESTUDIANTE" Relationship="Self.FK_ID_EST" FromRole="MONITORIA" ToRole="ESTUDIANTE" />
+          <NavigationProperty Name="TIPO_MONITORIA" Relationship="Model.FK_TIPO_MONITORIA" FromRole="MONITORIA" ToRole="TIPO_MONITORIA" />
+        </EntityType>
+        <EntityType Name="PERSONA">
+          <Key>
+            <PropertyRef Name="CEDULA" />
+          </Key>
+          <Property Name="CEDULA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="APELLIDOS" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DIRECCION" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="TELEFONO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="ESTUDIANTE" Relationship="Self.FK_PERSONA" FromRole="PERSONA" ToRole="ESTUDIANTE" />
+        </EntityType>
+        <EntityType Name="PROGRAMA">
+          <Key>
+            <PropertyRef Name="ID_PROGRAMA" />
+          </Key>
+          <Property Name="ID_PROGRAMA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TELEFONO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="ACTIVIDAD_ACADEMICA" Relationship="Self.FK_ID_PROGRAMA" FromRole="PROGRAMA" ToRole="ACTIVIDAD_ACADEMICA" />
+          <NavigationProperty Name="ESTUDIANTE" Relationship="Self.FK_ID_PROGRAMA_EST" FromRole="PROGRAMA" ToRole="ESTUDIANTE" />
+        </EntityType>
+        <EntityType Name="TIPO_MONITORIA">
+          <Key>
+            <PropertyRef Name="ID_TIPO_MONITORIA" />
+          </Key>
+          <Property Name="ID_TIPO_MONITORIA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VALOR_HORA" Type="Int32" Nullable="false" />
+          <Property Name="ESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="MONITORIA" Relationship="Model.FK_TIPO_MONITORIA" FromRole="TIPO_MONITORIA" ToRole="MONITORIA" />
+        </EntityType>
+        <Association Name="FK_ID_ACT_ACAD">
+          <End Role="ACTIVIDAD_ACADEMICA" Type="Self.ACTIVIDAD_ACADEMICA" Multiplicity="1" />
+          <End Role="ACT_ACAD_ESTUDIANTE" Type="Self.ACT_ACAD_ESTUDIANTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACTIVIDAD_ACADEMICA">
+              <PropertyRef Name="CODIGO" />
+            </Principal>
+            <Dependent Role="ACT_ACAD_ESTUDIANTE">
+              <PropertyRef Name="ID_ACTIVIDAD_ACADM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID_EST_ACT_ACAD">
+          <End Role="ESTUDIANTE" Type="Self.ESTUDIANTE" Multiplicity="1" />
+          <End Role="ACT_ACAD_ESTUDIANTE" Type="Self.ACT_ACAD_ESTUDIANTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTUDIANTE">
+              <PropertyRef Name="CODIGO" />
+            </Principal>
+            <Dependent Role="ACT_ACAD_ESTUDIANTE">
+              <PropertyRef Name="ID_ESTUDIANTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ACT_ACAD">
+          <End Role="ACTIVIDAD_ACADEMICA" Type="Self.ACTIVIDAD_ACADEMICA" Multiplicity="0..1" />
+          <End Role="MONITORIA" Type="Self.MONITORIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACTIVIDAD_ACADEMICA">
+              <PropertyRef Name="CODIGO" />
+            </Principal>
+            <Dependent Role="MONITORIA">
+              <PropertyRef Name="ID_ACTIVIDAD_ACADM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID_PROGRAMA">
+          <End Role="PROGRAMA" Type="Self.PROGRAMA" Multiplicity="0..1" />
+          <End Role="ACTIVIDAD_ACADEMICA" Type="Self.ACTIVIDAD_ACADEMICA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROGRAMA">
+              <PropertyRef Name="ID_PROGRAMA" />
+            </Principal>
+            <Dependent Role="ACTIVIDAD_ACADEMICA">
+              <PropertyRef Name="ID_PROGRAMA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FI_ID_ESTDIANTE">
+          <End Role="ESTUDIANTE" Type="Self.ESTUDIANTE" Multiplicity="1" />
+          <End Role="APOYO_ECONOMICO" Type="Self.APOYO_ECONOMICO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTUDIANTE">
+              <PropertyRef Name="CODIGO" />
+            </Principal>
+            <Dependent Role="APOYO_ECONOMICO">
+              <PropertyRef Name="ID_ESTUDIANTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APYO_ECONOMICO">
+          <End Role="APOYO_ECONOMICO" Type="Self.APOYO_ECONOMICO" Multiplicity="0..1" />
+          <End Role="DIRECTORIO_ARCHIVOS" Type="Self.DIRECTORIO_ARCHIVOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APOYO_ECONOMICO">
+              <PropertyRef Name="ID_APOYO" />
+            </Principal>
+            <Dependent Role="DIRECTORIO_ARCHIVOS">
+              <PropertyRef Name="ID_APOYO_ECONOMICO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID_EVENTO">
+          <End Role="EVENTO" Type="Self.EVENTO" Multiplicity="1" />
+          <End Role="APOYO_ECONOMICO" Type="Self.APOYO_ECONOMICO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EVENTO">
+              <PropertyRef Name="ID_EVENTO" />
+            </Principal>
+            <Dependent Role="APOYO_ECONOMICO">
+              <PropertyRef Name="ID_EVENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID_EST">
+          <End Role="ESTUDIANTE" Type="Self.ESTUDIANTE" Multiplicity="1" />
+          <End Role="MONITORIA" Type="Self.MONITORIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTUDIANTE">
+              <PropertyRef Name="CODIGO" />
+            </Principal>
+            <Dependent Role="MONITORIA">
+              <PropertyRef Name="ID_ESTUDIANTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID_PROGRAMA_EST">
+          <End Role="PROGRAMA" Type="Self.PROGRAMA" Multiplicity="0..1" />
+          <End Role="ESTUDIANTE" Type="Self.ESTUDIANTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROGRAMA">
+              <PropertyRef Name="ID_PROGRAMA" />
+            </Principal>
+            <Dependent Role="ESTUDIANTE">
+              <PropertyRef Name="ID_PROGRAMA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PERSONA">
+          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="0..1" />
+          <End Role="ESTUDIANTE" Type="Self.ESTUDIANTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONA">
+              <PropertyRef Name="CEDULA" />
+            </Principal>
+            <Dependent Role="ESTUDIANTE">
+              <PropertyRef Name="ID_PERSONA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ACT_ACAD_ESTUDIANTE" EntityType="Self.ACT_ACAD_ESTUDIANTE" />
+          <EntitySet Name="ACTIVIDAD_ACADEMICA" EntityType="Self.ACTIVIDAD_ACADEMICA" />
+          <EntitySet Name="APOYO_ECONOMICO" EntityType="Self.APOYO_ECONOMICO" />
+          <EntitySet Name="DIRECTORIO_ARCHIVOS" EntityType="Self.DIRECTORIO_ARCHIVOS" />
+          <EntitySet Name="ESTUDIANTE" EntityType="Self.ESTUDIANTE" />
+          <EntitySet Name="EVENTO" EntityType="Self.EVENTO" />
+          <EntitySet Name="MONITORIA" EntityType="Self.MONITORIA" />
+          <EntitySet Name="PERSONA" EntityType="Self.PERSONA" />
+          <EntitySet Name="PROGRAMA" EntityType="Self.PROGRAMA" />
+          <EntitySet Name="TIPO_MONITORIA" EntityType="Self.TIPO_MONITORIA" />
+          <AssociationSet Name="FK_ID_ACT_ACAD" Association="Self.FK_ID_ACT_ACAD">
+            <End Role="ACTIVIDAD_ACADEMICA" EntitySet="ACTIVIDAD_ACADEMICA" />
+            <End Role="ACT_ACAD_ESTUDIANTE" EntitySet="ACT_ACAD_ESTUDIANTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID_EST_ACT_ACAD" Association="Self.FK_ID_EST_ACT_ACAD">
+            <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+            <End Role="ACT_ACAD_ESTUDIANTE" EntitySet="ACT_ACAD_ESTUDIANTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ACT_ACAD" Association="Self.FK_ACT_ACAD">
+            <End Role="ACTIVIDAD_ACADEMICA" EntitySet="ACTIVIDAD_ACADEMICA" />
+            <End Role="MONITORIA" EntitySet="MONITORIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID_PROGRAMA" Association="Self.FK_ID_PROGRAMA">
+            <End Role="PROGRAMA" EntitySet="PROGRAMA" />
+            <End Role="ACTIVIDAD_ACADEMICA" EntitySet="ACTIVIDAD_ACADEMICA" />
+          </AssociationSet>
+          <AssociationSet Name="FI_ID_ESTDIANTE" Association="Self.FI_ID_ESTDIANTE">
+            <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+            <End Role="APOYO_ECONOMICO" EntitySet="APOYO_ECONOMICO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APYO_ECONOMICO" Association="Self.FK_APYO_ECONOMICO">
+            <End Role="APOYO_ECONOMICO" EntitySet="APOYO_ECONOMICO" />
+            <End Role="DIRECTORIO_ARCHIVOS" EntitySet="DIRECTORIO_ARCHIVOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID_EVENTO" Association="Self.FK_ID_EVENTO">
+            <End Role="EVENTO" EntitySet="EVENTO" />
+            <End Role="APOYO_ECONOMICO" EntitySet="APOYO_ECONOMICO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID_EST" Association="Self.FK_ID_EST">
+            <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+            <End Role="MONITORIA" EntitySet="MONITORIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID_PROGRAMA_EST" Association="Self.FK_ID_PROGRAMA_EST">
+            <End Role="PROGRAMA" EntitySet="PROGRAMA" />
+            <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PERSONA" Association="Self.FK_PERSONA">
+            <End Role="PERSONA" EntitySet="PERSONA" />
+            <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TIPO_MONITORIA" Association="Model.FK_TIPO_MONITORIA">
+            <End Role="TIPO_MONITORIA" EntitySet="TIPO_MONITORIA" />
+            <End Role="MONITORIA" EntitySet="MONITORIA" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_TIPO_MONITORIA">
+          <End Type="Model.TIPO_MONITORIA" Role="TIPO_MONITORIA" Multiplicity="0..1" />
+          <End Type="Model.MONITORIA" Role="MONITORIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_MONITORIA">
+              <PropertyRef Name="ID_TIPO_MONITORIA" />
+            </Principal>
+            <Dependent Role="MONITORIA">
+              <PropertyRef Name="ID_TIPO_MONITORIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="ACT_ACAD_ESTUDIANTE">
+            <EntityTypeMapping TypeName="Model.ACT_ACAD_ESTUDIANTE">
+              <MappingFragment StoreEntitySet="ACT_ACAD_ESTUDIANTE">
+                <ScalarProperty Name="ID_ESTUDIANTE" ColumnName="ID_ESTUDIANTE" />
+                <ScalarProperty Name="ID_ACTIVIDAD_ACADM" ColumnName="ID_ACTIVIDAD_ACADM" />
+                <ScalarProperty Name="PERIODO" ColumnName="PERIODO" />
+                <ScalarProperty Name="NOTA" ColumnName="NOTA" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ACTIVIDAD_ACADEMICA">
+            <EntityTypeMapping TypeName="Model.ACTIVIDAD_ACADEMICA">
+              <MappingFragment StoreEntitySet="ACTIVIDAD_ACADEMICA">
+                <ScalarProperty Name="CODIGO" ColumnName="CODIGO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID_PROGRAMA" ColumnName="ID_PROGRAMA" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="APOYO_ECONOMICO">
+            <EntityTypeMapping TypeName="Model.APOYO_ECONOMICO">
+              <MappingFragment StoreEntitySet="APOYO_ECONOMICO">
+                <ScalarProperty Name="ID_APOYO" ColumnName="ID_APOYO" />
+                <ScalarProperty Name="FECHA_SOLICITUD" ColumnName="FECHA_SOLICITUD" />
+                <ScalarProperty Name="COSTO_INSCRIPCION" ColumnName="COSTO_INSCRIPCION" />
+                <ScalarProperty Name="COSTO_TRANSPORTE" ColumnName="COSTO_TRANSPORTE" />
+                <ScalarProperty Name="COSTO_ALOJAMIENTO" ColumnName="COSTO_ALOJAMIENTO" />
+                <ScalarProperty Name="COSTO_ALIMENTACION" ColumnName="COSTO_ALIMENTACION" />
+                <ScalarProperty Name="VALOR_SOLICITADO" ColumnName="VALOR_SOLICITADO" />
+                <ScalarProperty Name="ID_EVENTO" ColumnName="ID_EVENTO" />
+                <ScalarProperty Name="ID_ESTUDIANTE" ColumnName="ID_ESTUDIANTE" />
+                <ScalarProperty Name="CONCEPTO_DIR_PROGRAMA" ColumnName="CONCEPTO_DIR_PROGRAMA" />
+                <ScalarProperty Name="CONCEPTO_DIR_LINEAINV" ColumnName="CONCEPTO_DIR_LINEAINV" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DIRECTORIO_ARCHIVOS">
+            <EntityTypeMapping TypeName="Model.DIRECTORIO_ARCHIVOS">
+              <MappingFragment StoreEntitySet="DIRECTORIO_ARCHIVOS">
+                <ScalarProperty Name="ID_DIRECTORIO" ColumnName="ID_DIRECTORIO" />
+                <ScalarProperty Name="NOMBRE_ARCHIVO" ColumnName="NOMBRE_ARCHIVO" />
+                <ScalarProperty Name="RUTA_SERVER" ColumnName="RUTA_SERVER" />
+                <ScalarProperty Name="FECHA_SUBIDA" ColumnName="FECHA_SUBIDA" />
+                <ScalarProperty Name="ID_APOYO_ECONOMICO" ColumnName="ID_APOYO_ECONOMICO" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ESTUDIANTE">
+            <EntityTypeMapping TypeName="Model.ESTUDIANTE">
+              <MappingFragment StoreEntitySet="ESTUDIANTE">
+                <ScalarProperty Name="CODIGO" ColumnName="CODIGO" />
+                <ScalarProperty Name="ID_PERSONA" ColumnName="ID_PERSONA" />
+                <ScalarProperty Name="SEMESTRE" ColumnName="SEMESTRE" />
+                <ScalarProperty Name="FECHA_INGRESO" ColumnName="FECHA_INGRESO" />
+                <ScalarProperty Name="PROMEDIO_ACUMULADO" ColumnName="PROMEDIO_ACUMULADO" />
+                <ScalarProperty Name="ID_PROGRAMA" ColumnName="ID_PROGRAMA" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EVENTO">
+            <EntityTypeMapping TypeName="Model.EVENTO">
+              <MappingFragment StoreEntitySet="EVENTO">
+                <ScalarProperty Name="ID_EVENTO" ColumnName="ID_EVENTO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="FECHA_EVENTO" ColumnName="FECHA_EVENTO" />
+                <ScalarProperty Name="TIPO" ColumnName="TIPO" />
+                <ScalarProperty Name="LUGAR" ColumnName="LUGAR" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MONITORIA">
+            <EntityTypeMapping TypeName="Model.MONITORIA">
+              <MappingFragment StoreEntitySet="MONITORIA">
+                <ScalarProperty Name="ID_ESTUDIANTE" ColumnName="ID_ESTUDIANTE" />
+                <ScalarProperty Name="PERIODO" ColumnName="PERIODO" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="ID_TIPO_MONITORIA" ColumnName="ID_TIPO_MONITORIA" />
+                <ScalarProperty Name="ID_ACTIVIDAD_ACADM" ColumnName="ID_ACTIVIDAD_ACADM" />
+                <ScalarProperty Name="HORAS_REPORTADAS" ColumnName="HORAS_REPORTADAS" />
+                <ScalarProperty Name="HORAS_PAGAS" ColumnName="HORAS_PAGAS" />
+                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PERSONA">
+            <EntityTypeMapping TypeName="Model.PERSONA">
+              <MappingFragment StoreEntitySet="PERSONA">
+                <ScalarProperty Name="CEDULA" ColumnName="CEDULA" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="APELLIDOS" ColumnName="APELLIDOS" />
+                <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROGRAMA">
+            <EntityTypeMapping TypeName="Model.PROGRAMA">
+              <MappingFragment StoreEntitySet="PROGRAMA">
+                <ScalarProperty Name="ID_PROGRAMA" ColumnName="ID_PROGRAMA" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_MONITORIA">
+            <EntityTypeMapping TypeName="Model.TIPO_MONITORIA">
+              <MappingFragment StoreEntitySet="TIPO_MONITORIA">
+                <ScalarProperty Name="ID_TIPO_MONITORIA" ColumnName="ID_TIPO_MONITORIA" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="VALOR_HORA" ColumnName="VALOR_HORA" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

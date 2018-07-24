@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a932351fe93c4d19a58173ccdf8bdee4" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.ACT_ACAD_ESTUDIANTE" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ACTIVIDAD_ACADEMICA" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.APOYO_ECONOMICO" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.DIRECTORIO_ARCHIVOS" Width="1.5" PointX="7.5" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ESTUDIANTE" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EVENTO" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.MONITORIA" Width="1.5" PointX="8.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PERSONA" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PROGRAMA" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.TIPO_MONITORIA" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_ID_ACT_ACAD" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ID_EST_ACT_ACAD" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ACT_ACAD" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ID_PROGRAMA" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FI_ID_ESTDIANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_APYO_ECONOMICO" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ID_EVENTO" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ID_EST" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ID_PROGRAMA_EST" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_PERSONA" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_TIPO_MONITORIA" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
